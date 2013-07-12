@@ -1,0 +1,16 @@
+<div class="span9">
+    <div class="leaderboard">
+        <br/>
+        <div class="lead">
+            Welcome <?php echo $this->user ?> 
+        </div>
+
+        <div>
+            <?php foreach($this->dashboard_buttons as $button){ ?>
+            <a class ="btn btn-large btn-primary" href="<?php echo $button['url'];?>"><?php echo $button['text'];?></a>
+                <?php } ?>
+        </div>
+
+    </div><!--/.fluid-container-->
+
+</div> <!-- /container -->

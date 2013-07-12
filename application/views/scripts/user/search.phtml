@@ -1,0 +1,32 @@
+<form action="" method="post">
+    <fieldset><legend>Search for a member</legend>
+
+        <input class ="input-medium search-query" type="text" name="search" value="<?php echo $this->search; ?>" placeholder="search by name"/>
+        <input type="submit" value="Go" name="submit" class="btn btn-primary">
+
+    </fieldset>
+    <?php
+    if (!is_null($this->choices)) :
+        ?>
+        <fieldset><legend>Search Results</legend>
+            <?php
+            if (false === $this->choices):
+                ?>
+                <p>There were no results returned from your search.</p>
+                <?php
+            else:
+                echo '<table class="table table-striped">';
+                echo '<thead>    <tr>      <th>#</th>      <th>Name</th>    </tr>  </thead>';
+                echo '<tbody>';
+                foreach ($this->choices as $user_id => $deets)
+                    echo '<tr><td>#</td>';
+                    echo '<td><a href="/user/summary/user_id/' . $user_id . '">' . $deets . '</a></td></tr>';
+                echo '</tbody>';
+                echo '</table>';
+            endif;
+            ?>
+        </fieldset>
+        <?php
+    endif;
+    ?>
+</form>

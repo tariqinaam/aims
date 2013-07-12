@@ -1,0 +1,75 @@
+<?php vdump($this->receipts);
+vdump($this->receipt_type);
+?>
+<div class="span9">
+    <div class="leaderboard">
+
+        <fieldset>
+            <legend>Chanda Summary</legend>
+            <div class="errors"><?php echo $this->errorMessage ?></b></div>
+
+            <div>
+                <span> <b>Name: </b> <?php
+echo $this->user['first_name'];
+echo ' ' . $this->user['last_name'];
+?></span>
+                <span><b>Tajneed: </b><?php echo $this->user['tajneed']; ?></span>
+            </div>
+            <br/>
+            <div>
+                <span><b>Age: </b><?php echo $this->user['age']; ?></span>
+                <span><b>Jamaat: </b><?php echo $this->jamaat; ?></span>
+            </div>
+        </fieldset>
+
+        <fieldset>
+
+
+            <table class="table table-striped">
+                <caption>....</caption>
+                <thead>
+                    <tr>
+                    <th>#</th>
+                     <?php foreach ($this->receipts as $receipts => $value) { ?>
+                    
+                           
+                        <?php foreach ($value as $receipt) { ?>
+
+                                <th class="summary-heading"><?php echo $receipt['receipt_type']; ?></th>
+
+                        <?php } ?> 
+                          
+                        <?php }?>
+                   </tr>
+                </thead>
+                <tbody>
+
+                        <?php foreach ($this->receipts as $receipts => $value) { ?>
+                    <tr>
+                            <td><?php echo $receipts?></td>
+                        <?php foreach ($value as $receipt) { ?>
+
+                                <td><?php echo $receipt['total']; ?></td>
+
+                        <?php } ?> 
+                          </tr>
+                        <?php }?>
+                      
+                        
+                    </tbody>
+                </table>
+
+            </fieldset>
+
+
+
+        </div><!--/.fluid-container-->
+        <div>
+            <p><a class="btn btn-large btn-primary " href="/receipt/form/user_id/<?php echo $this->user['ID']; ?>">Add Receipt for same member</a>
+            <a class="btn btn-large btn-primary " href="/receipt/index">Add Receipt for new member</a>
+            <a class="btn btn-large btn-primary " href="/user/dashboard">Go to Dashboard</a>
+        </p>
+    </div>
+
+</div> <!-- /container -->
+

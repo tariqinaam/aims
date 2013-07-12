@@ -1,0 +1,21 @@
+<?php $error = ($this->element->hasErrors()) ? 'error': ''?>
+<div class="control-group <?php echo $error?>">
+    <label class="control-label" for="input01"><?php echo $this->element->getLabel() ?></label>
+    
+    <div class="controls">
+        <input type="text" class="input-xlarge" id="<?php echo $this->element->getId();?>" name="<?php echo $this->element->getName() ?>" value="<?php echo $this->element->getValue() ?>">
+       <div class="help-block">
+          
+            <?php if ($this->element->hasErrors()): ?>
+        
+        <?php echo $this->formErrors($this->element->getMessages()); ?>
+       
+        <?php else:?>
+     
+            <?php echo $this->element->getDescription();?>
+       <?php endif;?>     
+       </div>
+    </div>
+
+</div>
+

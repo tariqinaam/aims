@@ -1,0 +1,30 @@
+<?php $error = ($this->element->hasErrors()) ? 'error' : '' ?>
+<?php //var_dump($this->element); ?>
+<div class="control-group <?php echo $error ?>">
+    <label class="control-label" for="<?php echo $this->element->getId(); ?>"><?php echo $this->element->getLabel() ?></label>
+
+    <div class="controls">
+
+        <select id="<?php echo $this->element->getName(); ?>" name="<?php echo $this->element->getName(); ?>">
+            
+            <?php foreach ($this->element->getMultiOptions() as $key => $val): ?>
+                <option value="<?php echo $key; ?>"<?php if (in_array($key, (array) $this->element->getValue())) {
+                echo ' selected="selected"';
+            } ?>>
+                <?php echo $val; ?>
+                </option>
+
+<?php endforeach; ?>
+        </select>
+        <div class="help-block">
+            
+            <?php if ($this->element->hasErrors()): ?>
+                <?php echo $this->formErrors($this->element->getMessages()); ?>
+            <?php else: ?>
+
+    <?php echo $this->element->getDescription(); ?>
+<?php endif; ?>     
+        </div>
+    </div>
+
+</div>

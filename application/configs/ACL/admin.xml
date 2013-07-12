@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ANONYMOUS ACCESS CONTROL LIST -->
+<acl>
+
+    <!-- Error (including 404) -->
+    <error allow="true">
+        <error />
+    </error>
+
+    <!-- Home page branch -->
+    <index allow="true">
+        <index />
+    </index>
+    <home allow="true">
+        
+    </home>
+    <user allow="true">
+        <login allow="true" />
+        <logout />
+    </user>
+  
+ 
+</acl>

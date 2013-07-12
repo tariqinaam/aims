@@ -1,0 +1,44 @@
+
+<div class="span9">
+    <div class="leaderboard">
+
+
+        <form name ="receipt" class="form-horizontal" method="post">
+            <fieldset>
+                <legend>Chanda Receipt</legend>
+
+                
+                <div>
+                    <span> <b>Name: </b> <?php
+                    echo $this->user['first_name'];
+                    echo ' ' . $this->user['last_name'];
+                    ?></span>
+                    <span><b>Tajneed: </b><?php echo $this->user['tajneed']; ?></span>
+                </div>
+                <div>
+                    <span><b>Age: </b><?php echo $this->user['age']; ?></span>
+                    <span><b>Jamaat: </b><?php echo $this->jamaat; ?></span>
+                </div>
+                 <div id="text-error">
+                    <b> <?php echo $this->errormessage ?></b>
+                </div>
+                <div class="control-group">
+                <?php echo $this->form; ?>
+                </div>
+                <div class="form-actions">
+
+                    <input type="submit" name="submit" value="submit" class="btn btn-large btn-primary">
+                    <a class="btn btn-large btn-primary " href="/receipt/index">Cancel</a>
+                </div>
+            </fieldset>
+
+        </form>
+
+        <hr>
+        <footer>
+            <p>&copy; Company 2012</p>
+        </footer>
+
+    </div><!--/.fluid-container-->
+
+</div> <!-- /container -->

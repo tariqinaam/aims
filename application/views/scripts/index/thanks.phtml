@@ -1,0 +1,21 @@
+<?php ?>
+
+<div class="span9">
+    <div class="leaderboard">
+
+        <?php if (count($this->messages)) : ?>
+
+            <ul id="messages" style="list-style: none;">
+
+                <?php foreach ($this->messages as $message) : ?>
+
+                    <li><?php echo $this->escape($message); ?></li>
+
+                <?php endforeach; ?>
+
+            </ul>
+
+        <?php endif; ?>
+
+    </div>
+</div>

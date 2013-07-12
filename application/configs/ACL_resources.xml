@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<acl-resources>
+    <resources>
+        <error>
+            <error />
+        </error>
+        <!-- Home page branch -->
+        <index>
+            <index />
+        </index>
+        <home>
+            <index />
+        </home>
+        <user>
+            <index />
+            <login />
+            <dashboard />
+            <logout />
+            <search />
+            <summary />
+        </user>
+        <receipt>
+            <index />
+            <create />
+            <form />
+            <submit />
+        </receipt>
+        
+    </resources>
+</acl-resources>
