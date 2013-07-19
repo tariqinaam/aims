@@ -1,0 +1,60 @@
+<style>
+    @media only screen and (max-width: 800px) {
+	#unseen table td:nth-child(2), 
+	#unseen table th:nth-child(2) {display: none;}
+}
+ 
+@media only screen and (max-width: 640px) {
+	#unseen table td:nth-child(4),
+	#unseen table th:nth-child(4),
+	#unseen table td:nth-child(7),
+	#unseen table th:nth-child(7),
+	#unseen table td:nth-child(8),
+	#unseen table th:nth-child(8){display: none;}
+}
+
+    </style>
+<div class="span9">
+    <div class="leaderboard">
+        <br/>
+        <div>
+            <?php foreach ($this->messages as $message) { ?>
+                <p class="text-error"><?php echo $message; ?></p>
+            <?php } ?>
+
+        </div>
+        <div>
+            <form action="" method="post">
+                <fieldset><legend>Choose Year</legend>
+
+                    <?php echo $this->form; ?>
+                    <input type="submit" value="Go" name="submit" class="btn btn-primary">
+
+                </fieldset>
+            </form>
+        </div>
+        <div>
+            <?php if ($this->data) { ?>
+            <?php //vdump($this->data);exit; ?>
+                <table class="table table-bordered table-striped">
+                    <caption style="font-weight: bold">yearly report for financial year <?php echo $this->current_year; ?></caption>
+                    <thead>
+                        <tr>
+                            <?php foreach ($this->data as $key=>$value) {?>
+                               <th style="font-size: 11px"><?php echo $key ?></th>
+                            <?php }?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                             <?php foreach ($this->data as $value) {?>
+                            <td>$<?php echo $value?></td>
+                            <?php } ?>
+                        </tr>
+                    </tbody>
+                </table>
+            <?php } ?>
+        </div>
+    </div><!--/.fluid-container-->
+
+</div> <!-- /container -->

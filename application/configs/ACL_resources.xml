@@ -18,6 +18,8 @@
             <logout />
             <search />
             <summary />
+            <create />
+            <search-year />
         </user>
         <receipt>
             <index />

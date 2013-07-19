@@ -1,0 +1,26 @@
+
+<div class="span9">
+    <div class="leaderboard">
+
+
+        <form name ="receipt" class="form-horizontal" method="post">
+            <fieldset>
+                <legend>Add a new Member</legend>
+                 <div id="text-error">
+                    <b> <?php echo $this->errormessage ?></b>
+                </div>
+                <div class="control-group">
+                <?php echo $this->form; ?>
+                </div>
+                <div class="form-actions">
+
+                    <input type="submit" name="submit" value="submit" class="btn btn-large btn-primary">
+                    <a class="btn btn-large btn-primary " href="/user/dashboard">Cancel</a>
+                </div>
+            </fieldset>
+
+        </form>
+
+    </div><!--/.fluid-container-->
+
+</div> <!-- /container -->

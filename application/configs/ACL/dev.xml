@@ -18,6 +18,7 @@
         <login allow="true" />
         <index allow="true"/>
         <dashboard />
+        <create />
     </user>
     <receipt allow="true">
     </receipt>

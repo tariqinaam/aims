@@ -29,6 +29,10 @@ class UserController extends Zend_Controller_Action {
             $this->_redirect('/user/login');
             exit();
         }
+             if ($this->_helper->FlashMessenger->hasMessages()) {
+        $this->view->messages = $this->_helper->FlashMessenger->getMessages();
+    }
+      
         $this->view->user = $this->user['fname'] . ' ' . $this->user['lname'];
         $this->view->dashboard_buttons = array();
         if (in_array($this->user->acl_role, array('dev', 'admin'))) {
@@ -38,7 +42,7 @@ class UserController extends Zend_Controller_Action {
                 'text' => 'Create New Receipt'
             );
             $this->view->dashboard_buttons[] = array(
-                'url' => '/user/add',
+                'url' => '/user/create',
                 'text' => 'Add New Member'
             );
             $this->view->dashboard_buttons[] = array(
@@ -46,8 +50,8 @@ class UserController extends Zend_Controller_Action {
                 'text' => 'View Member Summary'
             );
             $this->view->dashboard_buttons[] = array(
-                'url' => '/report/index',
-                'text' => 'Full Full Report'
+                'url' => '/user/search-year',
+                'text' => 'Full Report'
             );
         }
         if ('manager' == $this->user->acl_role) {
@@ -158,6 +162,49 @@ class UserController extends Zend_Controller_Action {
         
        
     }
+    
+    public function searchYearAction()
+    {
+          $db = Zend_Db_Table::getDefaultAdapter();
+         $receipt = new Application_Model_Receipt;
+         $year = new Application_Model_Year();
+         $form = new Application_Form_Year();
+         $all_year = $year->fetchAll($where= 'is_active = 1');
+         
+        foreach ($all_year as $year) {
+            $form->getElement('year')
+                    ->addMultiOptions(array($year['year'] => $year['year']));
+        }
+         
+        $this->view->form = $form;
+         
+         if ($this->getRequest()->isPost()) {
+            if ($this->view->form->isValid($_POST)) {
+                // process data here
+                $data = $form->getValues();
+                $sel_year = $data['year'];
+                $sql = "SELECT receipt_type, sum(value) as total from receipt_meta WHERE
+                        year =$sel_year GROUP BY receipt_type";
+                $value = $db->fetchAll($sql);
+                foreach ($value as $item) {
+                    $new_array[$item['receipt_type']] = $item['total'];
+                }
+               
+                if ($value) {
+                    $this->view->current_year = $sel_year;
+                    $this->view->data = $new_array;
+                }else{
+                    $this->view->message = "No chanda has been paid yet in $sel_year";
+                }
+                //vdump($data);exit;
+                //$this->redirect('/receipt/submit');
+                // vdump($surveyData);exit;
+                } else {
+                $this->view->errormessage = "errors on form, please check";
+                $this->view->form->populate($_POST);
+            }
+        }
+    }
 
     public function logoutAction() {
         Zend_Auth::getInstance()->clearIdentity();
@@ -210,6 +257,50 @@ class UserController extends Zend_Controller_Action {
                 }
             }
         }
+    }
+    
+    public function createAction(){
+         if (!in_array($this->user->acl_role, array('dev', 'admin')))
+            $this->redirect('/user/dashboard');
+    
+        $memberTable = new Application_Model_Member();
+        $form = new Application_Form_Member();
+        $jamaatModel = new Application_Model_Jamaat();
+        
+        $jamaats = $jamaatModel->fetchAll($where = 'is_active = 1 ');
+        foreach ($jamaats as $jamaat) {
+            $form->getElement('jamaat_id')
+                    ->addMultiOptions(array($jamaat['ID'] => $jamaat['jamaat_name']));
+        }
+         
+        $this->view->form = $form;
+    
+        if ($this->getRequest()->isPost()) {
+            if ($this->view->form->isValid($_POST)) {
+                // process data here
+                $data = $form->getValues();
+                $fname = $data['first_name'];
+                $lname = $data['last_name'];
+                $jamaatid = $data['jamaat_id'];
+                $wheres = array('first_name' => $fname, 'last_name' => $lname, 'jamaat_id' => $jamaatid);
+                $value = $memberTable->fetchRow($where = $wheres);
+                if ($value) {
+                    $this->view->errormessage = "Member Already  exist";
+                    $this->view->form->populate($_POST);
+                }else{
+                    $memberTable->insert($data);
+                    $this->_helper->flashMessenger->addMessage('Member successfully added');
+                    $this->_redirect("/user/dashboard");
+                }
+                //vdump($data);exit;
+                //$this->redirect('/receipt/submit');
+                // vdump($surveyData);exit;
+                } else {
+                $this->view->errormessage = "errors on form, please check";
+                $this->view->form->populate($_POST);
+            }
+        }
+        
     }
 
 }

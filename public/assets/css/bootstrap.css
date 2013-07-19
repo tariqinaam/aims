@@ -1040,8 +1040,8 @@ legend + .control-group {
 }
 table {
   max-width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
+  border-collapse: separate;
+  border-spacing: 0 5px;
 }
 .table {
   width: 100%;
@@ -1058,6 +1058,8 @@ table {
   font-weight: bold;
 }
 .table thead th {
+    background-color: #006DCC;
+    color: white;
   vertical-align: bottom;
 }
 .table thead:first-child tr th, .table thead:first-child tr td {

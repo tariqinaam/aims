@@ -6,6 +6,9 @@
         </div>
 
         <div>
+                <?php foreach($this->messages as $message){?>
+            <p class="text-error"><?php echo $message; ?></p>
+                <?php } ?>
             <?php foreach($this->dashboard_buttons as $button){ ?>
             <a class ="btn btn-large btn-primary" href="<?php echo $button['url'];?>"><?php echo $button['text'];?></a>
                 <?php } ?>

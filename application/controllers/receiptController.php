@@ -119,7 +119,7 @@ class ReceiptController extends Zend_Controller_Action {
                 // process data here
                 $data = $form->getValues();
                 $rcpt = $data['receiptno'];
-                $value = $receipt->select($where = "receipt_no =" . $rcpt);
+                $value = $receipt->fetchrow($where = "receipt_no =" . $rcpt);
                 if ($value) {
                     $this->view->errormessage = "Receipt no already exist";
                     $this->view->form->populate($_POST);
